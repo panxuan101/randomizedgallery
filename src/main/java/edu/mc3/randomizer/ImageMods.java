@@ -163,18 +163,18 @@ public class ImageMods {
 		    public static BufferedImage grayScale(BufferedImage img) throws IOException {
 		    	
 		    	
-		    	//convert the buffered image to a Planar 
-		    	Planar<GrayU8> color = ConvertBufferedImage.convertFrom(img,true, ImageType.pl(3,GrayU8.class));
-		    	
-		    	//use the Planar to create a GrayU8
-		    	GrayU8 weighted = new GrayU8(color.width,color.height);
 
-		    	//convert the image to gray scale
-		    	for (int i = 0; i < 100; i++) {
-					ColorRgb.rgbToGray_Weighted(color, weighted); 
-					
-		    	}
-		    	return img;
+                //convert the buffered image to a Planar 
+                Planar<GrayU8> color = ConvertBufferedImage.convertFrom(img,true, ImageType.pl(3,GrayU8.class));
+
+                //use the Planar to create a GrayU8
+                GrayU8 weighted = new GrayU8(color.width,color.height);
+
+                //convert the image to gray scale
+                ColorRgb.rgbToGray_Weighted(color, weighted); 
+                
+                ConvertBufferedImage.convertTo(weighted, img);
+                return img;
 		
 		    }
 		    
